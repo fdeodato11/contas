@@ -15,7 +15,7 @@
 
 		while($contador <16) {
 		
-		print "----------------------\n";
+		print "\n";
 		print  $agenda->[1]{B.$nomeConta} . ' vencimento -' . $agenda->[1]{C.$venciTB};
 		
 		$venciTB++;
