@@ -26,7 +26,7 @@
 	#Faz o sistema identificar as datas 
 	
 	($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-	$dia = $mday+17;
+	$dia = $mday;
 	$contador = 0;
 	$venciTB = 3;
 	$nomeConta = 3; 	
@@ -37,7 +37,7 @@
 
 	#print "teste";
 	#print $agenda->[1]{C.$venciTB};
-			if ( $dia > 31) {
+			#if ( $dia > 31) {
 				while($contador <16) {
 					if ($agenda->[1]{C.$venciTB} >= $mday ) {
 		print "\n";
@@ -46,6 +46,6 @@
 		$venciTB++;
 		$nomeConta++;
 		$contador++;	
-		}}
+		}#}
 	
 	
