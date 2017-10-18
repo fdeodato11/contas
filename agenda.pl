@@ -17,6 +17,8 @@
 #
 #
 
+use strict;
+use warnings;
 
 	#Le o excel e coloca em um array
 	use Spreadsheet::Read qw(ReadData);	
@@ -27,9 +29,9 @@
 	
 	($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 	$dia = $mday;
-	$contador = 0;
-	$venciTB = 3;
-	$nomeConta = 3; 	
+	my $contador = 0;
+	my $venciTB = 3;
+	my $nomeConta = 3; 	
 	#print 'Vivo Assinatura Mensal: ' . $agenda->[1]{C3};
 
 #Com a data do dia já em uma variavél, o script ira identificar as proximas fatas de vencimento bem como as 
