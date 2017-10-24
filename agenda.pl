@@ -17,8 +17,9 @@
 #
 #
 
-use strict;
-use warnings;
+
+
+
 
 	#Le o excel e coloca em um array
 	use Spreadsheet::Read qw(ReadData);	
