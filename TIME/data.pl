@@ -8,4 +8,5 @@ $stringTeste =~ /B0\d*;(\w*\W+\w*\W+);(\d*)/;
 
 
 
-print $2;
+print $1.'\n';
+print $2.'\n';
