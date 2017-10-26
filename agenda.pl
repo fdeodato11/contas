@@ -44,7 +44,7 @@
 				while($contador <16) {
 					if ($agenda->[1]{C.$venciTB} >= $mday ) {
 		print "\n";
-		print  $agenda->[1]{B.$nomeConta} . '---- vencimento ->' . $agenda->[1]{C.$venciTB};
+		print  $agenda->[1]{B.$nomeConta} . '---- vencimento ->' .  $agenda->[1]{C.$venciTB};
 		}
 		$venciTB++;
 		$nomeConta++;
