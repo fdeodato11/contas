@@ -4,7 +4,7 @@
 	my $dia = $mday;
 	
 	
-my $stringTeste = "B00922;VivoG;25;;GBR036;18;19;20;26";
+my $stringTeste = "B00922;VivoG;25;;GBR036;18;19;19;";
 
 
 $stringTeste =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;
@@ -17,22 +17,26 @@ $stringTeste =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;
 #print $4;   # Data de criação de requisição
 #print $5;   # Data de criação de pedido
 #print $6;   # Data da ultima aprovação
+ 
 
+#If a partir da data de criação da requizição
 
-
-#If de 
-	
-	
-
-
-
-
-
-
-	if ( $6 != null) {
-		print $6-$5. " dias para aprovacao";}
-		else {
-		print $dia-$5. " dias em aprovacao!!!";}
+	if ( $4 == null) {
+		my $semReq = $dia-$3;
+		print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
+		} elsif ( $5 == null){ 
+			my $semPed = $dia-$4;
+			print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
+				} elsif ( $6 == null) {
+					my $semApr = $dia-$5;
+					print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+						}
+#	if ( $6 == null) {
+#		print $dia-$5. " dias em aprovacao!!!";}
+#		elsif ($5 == null){
+#			print $dia-$4. " dias sem criação do pedido!!!";}
+			
+		
 		
 		
 		
