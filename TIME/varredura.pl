@@ -15,12 +15,16 @@ while (my $line = <$file>)
 }
 close $file;
 
-foreach (@lines) # Print the values that we got
-{
-open (MYFILE, '>>teste.txt');
+
+print $lines[2]; # posição que deve iniciar o array
+
+
+#foreach (@lines) # Print the values that we got
+#{
+#open (MYFILE, '>>teste.txt');
   
-  print MYFILE "$_\n";
-}
-close (MYFILE);
+#  print MYFILE "$_\n";
+#}
+#close (MYFILE);
 
 #3 POSIÇÃO DO ARRAY
