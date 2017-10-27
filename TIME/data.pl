@@ -20,17 +20,19 @@ $stringTeste =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;
  
 
 #If a partir da data de criação da requizição
-
-	if ( $4 == null) {
-		my $semReq = $dia-$3;
-		print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
-		} elsif ( $5 == null){ 
-			my $semPed = $dia-$4;
-			print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
-				} elsif ( $6 == null) {
-					my $semApr = $dia-$5;
-					print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
-						}
+		if ($3 == null) {
+			my $semCont = $2-$3;
+		print "Conta ".$1." recebida mas sem requisicao ha  " . $semCont. " dias." ;
+			if ( $4 == null) {
+				my $semReq = $dia-$3;
+				print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
+				} elsif ( $5 == null){ 
+					my $semPed = $dia-$4;
+					print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
+						} elsif ( $6 == null) {
+							my $semApr = $dia-$5;
+							print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+								}
 #	if ( $6 == null) {
 #		print $dia-$5. " dias em aprovacao!!!";}
 #		elsif ($5 == null){
