@@ -84,10 +84,7 @@ unless(open FILE, '>'.$file5) {
 print FILE "ATENÇÕES\n";
 print FILE "---------------------\n";
 
-<<<<<<< HEAD
-# close the file.
-close FILE;
-=======
+
 close $file5;
 
 
@@ -104,4 +101,4 @@ while (my $line = <$file>)
 close $file;
 
 
->>>>>>> 8bf7b74...  criacao dos 5 documentos para o futuro merge em 1
+
