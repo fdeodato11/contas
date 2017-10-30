@@ -17,6 +17,7 @@ system "del ".$file2;
 system "del ".$file3;
 system "del ".$file4;
 system "del ".$file5;
+
 #criação txt semReceb.txt 
 unless(open FILE, '>'.$file1) {
     # Die with error message 
@@ -75,7 +76,7 @@ close $file4;
 unless(open FILE, '>'.$file5) {
     # Die with error message 
     # if we can't open it.
-    die "\nUnable to create $file\n";
+    die "\nUnable to c reate $file\n";
 }
 
 # Write some text to the file.
