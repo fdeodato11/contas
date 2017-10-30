@@ -15,12 +15,29 @@
 #  MODIFICADO_POR  (DD/MM/YYYY)
 #  felipe.deodato     16/10/2017 - Primeira versao.
 
-sub Criatxt {
+#Faz o sistema identificar as datas
+	($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+
+#variaveis
 my $file1 = "semReceb.txt";
 my $file2 = "semReq.txt";
 my $file3 = "aguarAprov.txt";
 my $file4 = "ctsAprova.txt";
 my $file5 = "Atencao.txt";
+my $line;
+my $file;
+my $dia = $mday;
+my $contador = 0;	
+my $array = 2; 
+my $semCont;	
+my $semReq;
+my $semPed;
+my $semApr;
+
+
+#Deleta txt existentes e cria novos
+sub Criatxt {
+
 
 #apaga o antigo txt para evitar qualquer conflito
 system "del ".$file1;
@@ -100,4 +117,58 @@ close $file5;
 	
 	}
 	
-	Criatxt();
+#Coloca csv em array para facilitar as comparações	
+sub Arraycsv {
+open ($file, '<', 'Controlede_Contas_TI_mensal.csv') or die $!; # Open the file for reading
+while ( $line = <$file>)
+{
+  next if $line =~ m/^#/; # Look at each line and if if isn't a comment
+  push (@lines, $line);   # we will add it to the array.
+}
+close $file;
+}
+
+#popula txt com os dados do array(csv)
+sub Popula { 
+		while($contador < 14) {
+			$line[$array] ~= /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
+				
+
+#print $1;   # Nome da conta	
+#print $2;	 # Data de vencimento
+#print $3;	 # Data de recebimento da conta
+#print $4;   # Data de criação de requisição
+#print $5;   # Data de criação de pedido
+#print $6;   # Data da ultima aprovação
+
+	
+					if ($3 == null) {
+			 $semCont = $2-$3;
+			
+		print "Conta ".$1." recebida mas sem requisicao ha  " . $semCont. " dias." ;
+			if ( $4 == null) {
+				 $semReq = $dia-$3;
+				print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
+				} elsif ( $5 == null){ 
+					 $semPed = $dia-$4;
+					print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
+						} elsif ( $6 == null) {
+							$semApr = $dia-$5;
+							print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+								}
+					
+					
+		$array++;
+		$contador++;	
+							}
+	
+		
+		}
+
+
+
+#$lines[2];
+
+	
+}
+
