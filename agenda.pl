@@ -33,7 +33,7 @@ my $semCont;
 my $semReq;
 my $semPed;
 my $semApr;
-
+my $linhateste;
 
 #Deleta txt existentes e cria novos
 sub Criatxt {
@@ -128,10 +128,11 @@ while ( $line = <$file>)
 close $file;
 }
 
+
 #popula txt com os dados do array(csv)
 sub Popula { 
 		while($contador < 14) {
-			$line[$array] ~= /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
+			$line[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
 
 #print $1;   # Nome da conta	
@@ -144,8 +145,20 @@ sub Popula {
 	
 					if ($3 == null) {
 			 $semCont = $2-$3;
-			
-		print "Conta ".$1." recebida mas sem requisicao ha  " . $semCont. " dias." ;
+			 
+unless(open FILE, '>>'.$file1) {
+    # Die with error message 
+    # if we can't open it.
+    die "\nUnable to create $file\n";
+}
+
+# Write some text to the file.
+
+print FILE "Conta ".$1." recebida mas sem requisicao ha  " . $semCont. " dias." ;
+print FILE "\n";
+
+close $file1;
+		;
 			if ( $4 == null) {
 				 $semReq = $dia-$3;
 				print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
@@ -172,3 +185,7 @@ sub Popula {
 	
 }
 
+Criatxt();
+Arraycsv();
+
+#Popula();
