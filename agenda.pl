@@ -174,16 +174,13 @@ sub Popula {
 open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
     # Die with error message 
     # if we can't open it.
-    
-
-
-# Write some text to the file.
+	# Write some text to the file.
 
 print FILE "Conta ".$1." não recebida -----> " .$semCont. " vencimento ." ;
 print FILE "\n";
 
 close $file1;
-}		;
+}		
 			if ( $4 == null) {
 				 $semReq = $dia-$3;
 				 
@@ -204,10 +201,10 @@ close $file1;
 				
 #				print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
 								}
-					
-					
+							
 		$array++;
 		$contador++;	
+							
 							}
 	
 		
