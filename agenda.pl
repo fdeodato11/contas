@@ -145,7 +145,7 @@ sub Arraycsv {
 open ($file, '<', 'Controlede_Contas_TI_mensal.csv') or die $!; # Open the file for reading
 while ( $line = <$file>)
 {
-  next if $line =~ m/^#/; # Look at each line and if if isn't a comment
+  
   push (@lines, $line);   # we will add it to the array.
 }
 close $file;
@@ -154,6 +154,8 @@ close $file;
 
 #popula txt com os dados do array(csv)
 sub Popula { 
+
+
 		while($contador < 14) {
 			$lines[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
@@ -167,7 +169,7 @@ sub Popula {
 
 	
 					if ($3 == null) {
-			 $semCont = $2-$3;
+			 $semCont = $2;
 			 
 open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
     # Die with error message 
@@ -177,29 +179,30 @@ open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
 
 # Write some text to the file.
 
-print FILE "Conta ".$1." recebida mas sem requisicao ha  " .$semCont. " dias." ;
+print FILE "Conta ".$1." não recebida -----> " .$semCont. " vencimento ." ;
 print FILE "\n";
 
 close $file1;
 }		;
 			if ( $4 == null) {
 				 $semReq = $dia-$3;
+				 
 				 open( FILE, '>>'.$file2) or die "\nUnable to create $file\n";
 				# Die with error message 
 				# if we can't open it.
-    
-
-
 				# Write some text to the file.
-				print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
+				print FILE "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
+				print FILE "\n";
+				
 				close $file2;
 				
-				} elsif ( $5 == null){ 
+				} if ( $5 == null){ 
 					 $semPed = $dia-$4;
-					print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
-						} elsif ( $6 == null) {
+				#	print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
+						} if ( $6 == null) {
 							$semApr = $dia-$5;
-							print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+				
+#				print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
 								}
 					
 					
@@ -218,3 +221,5 @@ close $file1;
 Criatxt();
 Arraycsv();
 Popula();
+
+
