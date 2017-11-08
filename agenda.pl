@@ -23,7 +23,7 @@ my $file1 = "semReceb.txt";
 my $file2 = "semReq.txt";
 my $file3 = "aguarAprov.txt";
 my $file4 = "ctsAprova.txt";
-my $file5 = "Atencao.txt";
+my $file5 = "atencao.txt";
 my $line;
 my $file;
 my $dia = $mday;
@@ -60,6 +60,7 @@ print FILE "---------------------\n";
 
 close $file1;
 
+print "criado 1";
 
 unless(open FILE, '>'.$file2) {
     # Die with error message 
@@ -73,6 +74,8 @@ print FILE "Contas em requisição\n";
 print FILE "---------------------\n";
 
 close $file2;
+
+print "criado 2";
 
 unless(open FILE, '>'.$file3) {
 
@@ -88,6 +91,8 @@ print FILE "---------------------\n";
 
 close $file3;
 
+print "criado 3";
+
 unless(open FILE, '>'.$file4) {
     # Die with error message 
     # if we can't open it.
@@ -100,6 +105,8 @@ print FILE "Contas aprovadas\n";
 print FILE "---------------------\n";
 
 close $file4;
+
+print "criado 4";
 
 unless(open FILE, '>'.$file5) {
     # Die with error message 
@@ -114,7 +121,7 @@ print FILE "---------------------\n";
 
 
 close $file5;
-	
+print "criado 5";	
 	}
 	
 #Coloca csv em array para facilitar as comparações	
@@ -126,13 +133,13 @@ while ( $line = <$file>)
   push (@lines, $line);   # we will add it to the array.
 }
 close $file;
-}
 
+}
 
 #popula txt com os dados do array(csv)
 sub Popula { 
 		while($contador < 14) {
-			$line[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
+			$lines[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
 
 #print $1;   # Nome da conta	
@@ -146,11 +153,11 @@ sub Popula {
 					if ($3 == null) {
 			 $semCont = $2-$3;
 			 
-unless(open FILE, '>>'.$file1) {
+open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
     # Die with error message 
     # if we can't open it.
-    die "\nUnable to create $file\n";
-}
+    
+
 
 # Write some text to the file.
 
@@ -158,16 +165,25 @@ print FILE "Conta ".$1." recebida mas sem requisicao ha  " . $semCont. " dias." 
 print FILE "\n";
 
 close $file1;
-		;
+}		;
 			if ( $4 == null) {
 				 $semReq = $dia-$3;
+				 open( FILE, '>>'.$file2) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+    
+
+
+				# Write some text to the file.
 				print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
-				} elsif ( $5 == null){ 
-					 $semPed = $dia-$4;
-					print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
-						} elsif ( $6 == null) {
-							$semApr = $dia-$5;
-							print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+				close $file2;
+				
+				} #elsif ( $5 == null){ 
+					# $semPed = $dia-$4;
+					#print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
+					#	} elsif ( $6 == null) {
+					#		$semApr = $dia-$5;
+					#		print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
 								}
 					
 					
@@ -176,16 +192,13 @@ close $file1;
 							}
 	
 		
-		}
+		
 
 
 
-#$lines[2];
 
 	
-}
 
 Criatxt();
-Arraycsv();
-
+#Arraycsv();
 #Popula();
