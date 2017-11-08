@@ -21,9 +21,10 @@
 #variaveis
 my $file1 = "semReceb.txt";
 my $file2 = "semReq.txt";
-my $file3 = "aguarAprov.txt";
-my $file4 = "ctsAprova.txt";
-my $file5 = "atencao.txt";
+my $file3 = "semPed.txt";
+my $file4 = "aguarAprov.txt";
+my $file5 = "ctsAprova.txt";
+my $file6 = "atencao.txt";
 my $line;
 my $file;
 my $dia = $mday;
@@ -86,7 +87,7 @@ unless(open FILE, '>'.$file3) {
 
 # Write some text to the file.
 
-print FILE "Contas aguardando aprovação\n";
+print FILE "Contas aguardando pedido\n";
 print FILE "---------------------\n";
 
 close $file3;
@@ -101,7 +102,7 @@ unless(open FILE, '>'.$file4) {
 
 # Write some text to the file.
 
-print FILE "Contas aprovadas\n";
+print FILE "Contas aguardando aprovação\n";
 print FILE "---------------------\n";
 
 close $file4;
@@ -116,12 +117,27 @@ unless(open FILE, '>'.$file5) {
 
 # Write some text to the file.
 
-print FILE "ATENÇÕES\n";
+print FILE "Contas aprovadas\n";
 print FILE "---------------------\n";
 
 
 close $file5;
 print "criado 5";	
+
+unless(open FILE, '>'.$file6) {
+    # Die with error message 
+    # if we can't open it.
+    die "\nUnable to c reate $file\n";
+}
+
+# Write some text to the file.
+
+print FILE "ATENÇÕES\n";
+print FILE "---------------------\n";
+
+
+close $file5;
+
 	}
 	
 #Coloca csv em array para facilitar as comparações	
@@ -161,7 +177,7 @@ open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
 
 # Write some text to the file.
 
-print FILE "Conta ".$1." recebida mas sem requisicao ha  " . $semCont. " dias." ;
+print FILE "Conta ".$1." recebida mas sem requisicao ha  " .$semCont. " dias." ;
 print FILE "\n";
 
 close $file1;
@@ -178,12 +194,12 @@ close $file1;
 				print "Conta ".$1." recebida mas sem requisicao ha  " . $semReq. " dias." ;
 				close $file2;
 				
-				} #elsif ( $5 == null){ 
-					# $semPed = $dia-$4;
-					#print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
-					#	} elsif ( $6 == null) {
-					#		$semApr = $dia-$5;
-					#		print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+				} elsif ( $5 == null){ 
+					 $semPed = $dia-$4;
+					print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
+						} elsif ( $6 == null) {
+							$semApr = $dia-$5;
+							print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
 								}
 					
 					
@@ -194,11 +210,11 @@ close $file1;
 		
 		
 
-
+}
 
 
 	
 
 Criatxt();
-#Arraycsv();
-#Popula();
+Arraycsv();
+Popula();
