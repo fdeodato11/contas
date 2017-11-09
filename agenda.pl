@@ -158,7 +158,7 @@ close $file;
 sub Popula { 
 
 
-		while($contador < 14) {
+		while($contador < 13) {
 			$lines[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
 #print $1;   # Nome da conta	
