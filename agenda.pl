@@ -181,7 +181,7 @@ print FILE "\n";
 
 close $file1;
 }		
-			if ( $4 == null) {
+			if ($3 != null && $4 == null) {
 				 $semReq = $dia-$3;
 				 
 				 open( FILE, '>>'.$file2) or die "\nUnable to create $file\n";
@@ -193,13 +193,41 @@ close $file1;
 				
 				close $file2;
 				
-				} if ( $5 == null){ 
+				} if ( $3 != null && $4 != null && $5 == null){ 
 					 $semPed = $dia-$4;
-				#	print "Conta ".$1." sem pedido ha " . $semPed . " dias." ;			
-						} if ( $6 == null) {
-							$semApr = $dia-$5;
+					 
+				open( FILE, '>>'.$file3) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+				# Write some text to the file.
+				print FILE "Conta ".$1." sem pedido ha " . $semPed . " dias."  ;
+				print FILE "\n";
 				
-#				print "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+				close $file3;
+							
+				} if ($3 != null && $4 != null && $5 != null && $6 == null) {
+							$semApr = $dia-$5;
+				open( FILE, '>>'.$file4) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+				# Write some text to the file.
+				print FILE "Conta ".$1." esperando aprovacao ha " . $semApr . " dias." ;
+				print FILE "\n";
+				
+				close $file4;
+		
+				} if ($3 != null && $4 != null && $5 != null && $6 != null) {
+							$semApr = $dia-$5;
+				open( FILE, '>>'.$file5) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+				# Write some text to the file.
+				print FILE "Conta ".$1."  aprovada dia " . $semApr ;
+				print FILE "\n";
+				
+				close $file5;
+								
+		
 								}
 							
 		$array++;
