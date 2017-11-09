@@ -1,42 +1,59 @@
 #!C:/Perl/bin
 #
-# versao --
+# versao 1.0.0
 #
 # NOME
 #   agenda.pl
 #
 # DESCRICAO
-#   Auxilia no dia a dia para não perder o vencimento de nenhuma conta da área de Comunicação e TI
+#   Auxilia no dia a dia para não perder as datas de vencimento de nenhuma conta da área de Comunicação e TI
 #
 # NOTA
-#   uma saída em txt com dados importantes para o acompanhamento será gerado.(não implementado)
+#   uma saída em txt com dados importantes para o acompanhamento será gerado.
 #
 #
 #  MODIFICADO_POR  (DD/MM/YYYY)
-#  felipe.deodato     16/10/2017 - Primeira versao.
+#  felipe.deodato     09/11/2017 - Primeira versao.
+
+
 
 #Faz o sistema identificar as datas
 	($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 
-#variaveis
+
+
+#variaveis de nome de saida
 my $file1 = "semReceb.txt";
 my $file2 = "semReq.txt";
 my $file3 = "semPed.txt";
 my $file4 = "aguarAprov.txt";
 my $file5 = "ctsAprova.txt";
 my $file6 = "atencao.txt";
+my $file7 = "Completo.txt";
+
+#Variaveis para popular o array
 my $line;
 my $file;
+
+#variavel para conta correta do dia 
 my $dia = $mday;
+
+#variaveis para popular saida
 my $contador = 0;	
 my $array = 2; 
 my $semCont;	
 my $semReq;
 my $semPed;
 my $semApr;
-my $linhateste;
+
+
 my $positivo; # deixar a diferenca sempre positiva
 
+
+
+
+
+#ROTINAS
 
 #Deleta txt existentes e cria novos
 sub Criatxt {
@@ -48,8 +65,12 @@ system "del ".$file2;
 system "del ".$file3;
 system "del ".$file4;
 system "del ".$file5;
+system "del ".$file6;
+system "del ".$file7;
 
-#criação txt semReceb.txt 
+print "Txt apagados\n";
+
+
 unless(open FILE, '>'.$file1) {
     # Die with error message 
     # if we can't open it.
@@ -57,13 +78,12 @@ unless(open FILE, '>'.$file1) {
 }
 
 # Write some text to the file.
-
+print FILE "---------------------\n";
 print FILE "Contas não recebidas\n";
 print FILE "---------------------\n";
 
 close $file1;
 
-print "criado 1";
 
 unless(open FILE, '>'.$file2) {
     # Die with error message 
@@ -72,13 +92,12 @@ unless(open FILE, '>'.$file2) {
 }
 
 # Write some text to the file.
-
+print FILE "---------------------\n";
 print FILE "Contas em requisição\n";
 print FILE "---------------------\n";
 
 close $file2;
 
-print "criado 2";
 
 unless(open FILE, '>'.$file3) {
 
@@ -88,13 +107,12 @@ unless(open FILE, '>'.$file3) {
 }
 
 # Write some text to the file.
-
+print FILE "---------------------\n";
 print FILE "Contas aguardando pedido\n";
 print FILE "---------------------\n";
 
 close $file3;
 
-print "criado 3";
 
 unless(open FILE, '>'.$file4) {
     # Die with error message 
@@ -103,13 +121,12 @@ unless(open FILE, '>'.$file4) {
 }
 
 # Write some text to the file.
-
+print FILE "---------------------\n";
 print FILE "Contas aguardando aprovação\n";
 print FILE "---------------------\n";
 
 close $file4;
 
-print "criado 4";
 
 unless(open FILE, '>'.$file5) {
     # Die with error message 
@@ -118,13 +135,13 @@ unless(open FILE, '>'.$file5) {
 }
 
 # Write some text to the file.
-
+print FILE "---------------------\n";
 print FILE "Contas aprovadas\n";
 print FILE "---------------------\n";
 
 
 close $file5;
-print "criado 5";	
+	
 
 unless(open FILE, '>'.$file6) {
     # Die with error message 
@@ -133,13 +150,15 @@ unless(open FILE, '>'.$file6) {
 }
 
 # Write some text to the file.
-
+print FILE "---------------------\n";
 print FILE "ATENÇÕES\n";
 print FILE "---------------------\n";
 
 
-close $file5;
+close $file6;
 
+
+print "Txt criados com sucesso\n";
 	}
 	
 #Coloca csv em array para facilitar as comparações	
@@ -152,6 +171,7 @@ while ( $line = <$file>)
 }
 close $file;
 
+print "array populado\n";
 }
 
 #popula txt com os dados do array(csv)
@@ -253,14 +273,31 @@ sub Popula {
 	
 		
 		
-
+print "saidas populadas\n";
 }
 
+#Junta todas os txt em uma unica saida
+sub Merge {
+@ARGV = ('semReceb.txt', 'semReq.txt', 'semPed.txt', 'aguarAprov.txt', 'ctsAprova.txt', 'atencao.txt' );
 
+open MULTI, '>>', 'Completo.txt' 
+    or die $!;
+
+while (<>) {
+    print MULTI;
+
+}
+ print "FINALIZADO\n";
+ }
 	
 
+	
+	
+	
+#main	
+	
 Criatxt();
 Arraycsv();
 Popula();
-
+Merge();
 
