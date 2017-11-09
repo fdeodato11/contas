@@ -35,6 +35,8 @@ my $semReq;
 my $semPed;
 my $semApr;
 my $linhateste;
+my $positivo; # deixar a diferenca sempre positiva
+
 
 #Deleta txt existentes e cria novos
 sub Criatxt {
@@ -159,7 +161,6 @@ sub Popula {
 		while($contador < 14) {
 			$lines[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
-
 #print $1;   # Nome da conta	
 #print $2;	 # Data de vencimento
 #print $3;	 # Data de recebimento da conta
@@ -167,21 +168,25 @@ sub Popula {
 #print $5;   # Data de criação de pedido
 #print $6;   # Data da ultima aprovação
 
+#Calculo para deixar sempre a diferença positiva para futura comparacao
+	$positivo = abs($dia-$2);
+
 	
-					if ($3 == null) {
-			 $semCont = $2;
+	
+				if ($3 == null) {
+				$semCont = $2;
 			 
-open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
-    # Die with error message 
-    # if we can't open it.
-	# Write some text to the file.
+				open( FILE, '>>'.$file1) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+				# Write some text to the file.
 
-print FILE "Conta ".$1." não recebida -----> " .$semCont. " vencimento ." ;
-print FILE "\n";
+				print FILE "Conta ".$1." não recebida -----> " .$semCont. " vencimento ." ;
+				print FILE "\n";
 
-close $file1;
-}		
-			if ($3 != null && $4 == null) {
+				close $file1;
+	
+				} if ($3 != null && $4 == null) {
 				 $semReq = $dia-$3;
 				 
 				 open( FILE, '>>'.$file2) or die "\nUnable to create $file\n";
@@ -228,8 +233,19 @@ close $file1;
 				close $file5;
 								
 		
-								}
-							
+				} if ($positivo < 16 && $6 == null ) {
+				open( FILE, '>>'.$file6) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+				# Write some text to the file.
+				print FILE "Conta ".$1." há " . $positivo . " dias para vencimento!!!! ";
+				print FILE "\n";
+				
+				close $file6;		
+				}
+		
+		
+		
 		$array++;
 		$contador++;	
 							
