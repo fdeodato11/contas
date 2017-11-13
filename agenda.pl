@@ -161,6 +161,31 @@ close $file6;
 print "Txt criados com sucesso\n";
 	}
 	
+#Apaga pastas antigas e gera novas para evitar conflito	
+sub Criapasta{ 
+
+#Apaga pastas antigas	
+system "rmdir CONTAS\\Sem_Recebimento";
+system "rmdir CONTAS\\Sem_Requisicao";
+system "rmdir CONTAS\\Sem_Pedido";
+system "rmdir CONTAS\\Aguardando_aporovacao";
+system "rmdir CONTAS\\Contas_Aprovadas";
+
+print "Pastas excluidas com sucesso";
+
+#Gera pastas novas
+system "mkdir CONTAS";
+system "mkdir CONTAS\\Sem_Recebimento";
+system "mkdir CONTAS\\Sem_Requisicao";
+system "mkdir CONTAS\\Sem_Pedido";
+system "mkdir CONTAS\\Aguardando_aporovacao";
+system "mkdir CONTAS\\Contas_Aprovadas";
+
+
+print "Pastas geradas com sucesso";
+
+}	
+	
 #Coloca csv em array para facilitar as comparações	
 sub Arraycsv {
 open ($file, '<', 'Controlede_Contas_TI_mensal.csv') or die $!; # Open the file for reading
@@ -290,14 +315,34 @@ while (<>) {
  print "FINALIZADO\n";
  }
 	
+#manipula as saidas para as respectivas pastas
+sub Movetxt {
 
-	
+system "move semReceb.txt CONTAS\\Sem_Recebimento";
+system "move semReq.txt CONTAS\\Sem_Requisicao";
+system "move semPed.txt CONTAS\\Sem_Pedido";
+system "move aguarAprov.txt CONTAS\\Aguardando_aporovacao";
+system "move ctsAprova.txt CONTAS\\Contas_Aprovadas";
+
+print "txt movidos com sucesso";
+
+system "del ".$file1;
+system "del ".$file2;
+system "del ".$file3;
+system "del ".$file4;
+system "del ".$file5;
+
+print "txt excluidos da raiz";
+
+
+}
 	
 	
 #main	
 	
 Criatxt();
-Arraycsv();
-Popula();
-Merge();
-
+Criapasta();
+#Arraycsv();
+#Popula();
+#Merge();
+Movetxt();
