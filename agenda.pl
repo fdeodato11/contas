@@ -15,10 +15,11 @@
 #  MODIFICADO_POR  (DD/MM/YYYY)
 #  felipe.deodato     09/11/2017 - Primeira versao.
 
-
+#use strict;
+#use warnings;
 
 #Faz o sistema identificar as datas
-	($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+	(my $sec,my $min,my $hour,my $mday,my $mon,my $year,my $wday,my $yday,my $isdst) = localtime();
 
 
 
@@ -34,6 +35,7 @@ my $file7 = "Completo.txt";
 #Variaveis para popular o array
 my $line;
 my $file;
+my @lines;
 
 #variavel para conta correta do dia 
 my $dia = $mday;
@@ -342,7 +344,7 @@ print "txt excluidos da raiz";
 	
 Criatxt();
 Criapasta();
-#Arraycsv();
-#Popula();
-#Merge();
+Arraycsv();
+Popula();
+Merge();
 Movetxt();
