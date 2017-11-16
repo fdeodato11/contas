@@ -269,12 +269,12 @@ sub Popula {
 				close $file4;
 		
 				} if ($3 != null && $4 != null && $5 != null && $6 != null) {
-							$semApr = $dia-$5;
+							$semApr = $6;
 				open( FILE, '>>'.$file5) or die "\nUnable to create $file\n";
 				# Die with error message 
 				# if we can't open it.
 				# Write some text to the file.
-				print FILE "Conta ".$1."  aprovada dia " . $semApr ;
+				print FILE "Conta ".$1." aprovada dia " . $semApr ;
 				print FILE "\n";
 				
 				close $file5;
