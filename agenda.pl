@@ -206,6 +206,7 @@ sub Popula {
 
 
 		while($contador < 13) {
+		#regex para desmembrar a cada linha do csv para formatar a saida
 			$lines[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
 #print $1;   # Nome da conta	
