@@ -204,8 +204,9 @@ print "array populado\n";
 #popula txt com os dados do array(csv)
 sub Popula { 
 
-
-		while($contador < 13) {
+		#numero de linhas que tem no csv com informacao, trocar sempre que preciso
+		while($contador < 14) {
+		
 		#regex para desmembrar a cada linha do csv para formatar a saida
 			$lines[$array] =~ /B0\d*;(\w*);(\d*);;GBR\d*;(\d*);(\d*);(\d*);(\d*)/;	
 				
