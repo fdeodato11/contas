@@ -31,6 +31,7 @@ my $file4 = "aguarAprov.txt";
 my $file5 = "ctsAprova.txt";
 my $file6 = "atencao.txt";
 my $file7 = "Completo.txt";
+my $file8 = "Atrasos.txt";
 
 #Variaveis para popular o array
 my $line;
@@ -50,7 +51,7 @@ my $semApr;
 
 
 my $positivo; # deixar a diferenca sempre positiva
-
+my $negativo; # variavel para diferenciar contas atrasadas
 
 
 
@@ -69,6 +70,7 @@ system "del ".$file4;
 system "del ".$file5;
 system "del ".$file6;
 system "del ".$file7;
+system "del ".$file8;
 
 print "Txt apagados\n";
 
@@ -160,6 +162,20 @@ print FILE "---------------------\n";
 close $file6;
 
 
+unless(open FILE, '>'.$file8) {
+    # Die with error message 
+    # if we can't open it.
+    die "\nUnable to c reate $file\n";
+}
+
+# Write some text to the file.
+print FILE "---------------------\n";
+print FILE "ATRASADAS\n";
+print FILE "---------------------\n";
+
+
+close $file8;
+
 print "Txt criados com sucesso\n";
 	}
 	
@@ -219,6 +235,7 @@ sub Popula {
 
 #Calculo para deixar sempre a diferença positiva para futura comparacao
 	$positivo = abs($dia-$2);
+	$negativo = $2-$dia;
 
 	
 	
@@ -282,7 +299,19 @@ sub Popula {
 				close $file5;
 								
 		
-				} if ($positivo < 16 && $6 == null ) {
+				} if ($negativo < 0 && $6 == null ) {
+				
+					open( FILE, '>>'.$file8) or die "\nUnable to create $file\n";
+				# Die with error message 
+				# if we can't open it.
+				# Write some text to the file.
+				print FILE "Conta ".$1." VENCIDA há " . $positivo . " dias !!!! ";
+				print FILE "\n";
+				
+				close $file8;
+				
+				} if ($negativo > 0 && $negativo < 16 && $6 == null ) {
+				
 				open( FILE, '>>'.$file6) or die "\nUnable to create $file\n";
 				# Die with error message 
 				# if we can't open it.
@@ -290,24 +319,25 @@ sub Popula {
 				print FILE "Conta ".$1." há " . $positivo . " dias para vencimento!!!! ";
 				print FILE "\n";
 				
-				close $file6;		
-				}
+				close $file6;	
+				
+				}  
 		
 		
 		
 		$array++;
 		$contador++;	
 							
-							}
+							
 	
 		
-		
+	}	
 print "saidas populadas\n";
 }
 
 #Junta todas os txt em uma unica saida
 sub Merge {
-@ARGV = ('semReceb.txt', 'semReq.txt', 'semPed.txt', 'aguarAprov.txt', 'ctsAprova.txt', 'atencao.txt' );
+@ARGV = ('Atrasos.txt', 'semReceb.txt', 'semReq.txt', 'semPed.txt', 'aguarAprov.txt', 'ctsAprova.txt', 'atencao.txt' );
 
 open MULTI, '>>', 'Completo.txt' 
     or die $!;
