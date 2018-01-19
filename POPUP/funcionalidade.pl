@@ -21,3 +21,7 @@ $mw->Button(-text => "Exit",
 
 #$mw->Button(-text => "TESTE", -command => sub { exit })->pack;
 MainLoop;
+
+
+#https://docstore.mik.ua/orelly/perl3/tk/ch02_01.htm
+#GEOMETRIA PERL ( BUTTONS ) 
