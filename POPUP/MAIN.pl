@@ -8,7 +8,7 @@ $mw->title("Auxiliar de Contas");
 
 
 
-$mw->Button(-text => 'RECEBER CONTA', -command => sub { exit })->pack(-side => 'top', -fill => 'both');
+$mw->Button(-text => 'RECEBER CONTA', -command => sub\&nextwin)->pack(-side => 'top', -fill => 'both');
 $mw->Button(-text => 'ANDAR NO SISTEMA', -command => sub { exit })->pack(-side => 'top', -fill => 'both');
 $mw->Button(-text => 'ACOMPANHAR MES', -command => sub { exit })->pack(-side => 'top', -fill => 'both');
 $mw->Button(-text => 'MEDIA CONTAS', -command => sub { exit })->pack(-side => 'top', -fill => 'both');
@@ -19,6 +19,14 @@ $mw->Button(-text => "Exit",
                                             -expand => 1,
                                             -fill => 'x');
 
+sub nextwin {
+my $win2 = $mw->Toplevel();
+my $b2 = $win2 -> Button (-text=>"quit", -command=>sub { exit }) -> pa
++ck();
+}
+											
+											
+											
 #$mw->Button(-text => "TESTE", -command => sub { exit })->pack;
 MainLoop;
 #$mw->Button(-text => "LEFT", -command => sub { exit })
