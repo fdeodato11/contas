@@ -33,6 +33,9 @@ sub RECEBEconta {
         -font       => 'ukai',
         -labelside  => "acrosstop",
         )->pack();
+		$f1->Entry(-background => 'black', -foreground => 'white')->pack(-side => "bottom");
+		$f1->Label(-text => "VALOR")->pack(-side => "bottom");
+
 	
 my @list = ("Vivo Movel","Vivo 3G","Vivo IP Dedicado","Vivo Monitora","Claro 3G","Embratel Vipphone","Embratel Link Internet","Nitromidia","Planus Taxa Fixa","Planus Taxa Variavel","Konics","Engineering","DirectNet","NETVirtua");
 
